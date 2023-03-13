@@ -8,7 +8,7 @@ from keras.preprocessing.text import Tokenizer
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--raw_data_path', default='../data/train.json', type=str, required=False, help='原始训练语料')
+    parser.add_argument('--raw_data_path', default='../data/train.txt', type=str, required=False, help='原始训练语料')
     parser.add_argument('--vocab_file', default='vocab_processed.txt', type=str, required=False, help='生成vocab链接')
     parser.add_argument('--vocab_size', default=50000, type=int, required=False, help='词表大小')
     args = parser.parse_args()
@@ -19,7 +19,7 @@ def main():
     print('This script is extremely slow especially for large corpus. Take a break.')
 
     f = open(args.raw_data_path, 'r')
-    lines = json.load(f)
+    lines = f.readlines()
     for i, line in enumerate(tqdm(lines)):
         lines[i] = lac.cut(line, text=True)
 
